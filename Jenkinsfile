@@ -20,8 +20,9 @@ pipeline {
         stage('Deploy to Staging') {
             steps {
                 echo 'Deploying code to Staging Environment...'
-                // sh 'rm -rf staging/*'
-                sh 'cp -r src/* staging/'
+                bat 'if not exist staging mkdir staging'
+                bat 'del /Q staging\\*'
+                bat 'xcopy src\\* staging\\ /E /Y /I'
             }
         }
         stage('Manual Approval') {
@@ -32,9 +33,9 @@ pipeline {
         stage('Deploy to Production') {
             steps {
                 echo 'Deploying code to Production Environment...'
-                // sh 'rm -rf production/*'
-                sh 'cp -r src/* production/'
-            }
+                bat 'if not exist production mkdir production'
+                bat 'del /Q production\\*'
+                bat 'xcopy src\\* production\\ /E /Y /I'
         }
     }
     post {
