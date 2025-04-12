@@ -19,7 +19,7 @@ pipeline {
         }
         stage('Deploy to Staging') {
             steps {
-                echo 'Deploying code to Staging Environment...'
+                echo 'Deploying code to Staging Environment'
                 bat 'if not exist staging mkdir staging'
                 bat 'del /Q staging\\*'
                 bat 'xcopy src\\* staging\\ /E /Y /I'
@@ -27,15 +27,16 @@ pipeline {
         }
         stage('Manual Approval') {
             steps {
-                input message: 'Approve deployment to production?', ok: 'Deploy Now'
+                input message: 'Ready to deploy to Production?', ok: 'Deploy'
             }
         }
         stage('Deploy to Production') {
             steps {
-                echo 'Deploying code to Production Environment...'
+                echo 'Deploying code to Production Environment'
                 bat 'if not exist production mkdir production'
                 bat 'del /Q production\\*'
                 bat 'xcopy src\\* production\\ /E /Y /I'
+            }
         }
     }
     post {
