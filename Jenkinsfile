@@ -20,7 +20,7 @@ pipeline {
         stage('Deploy to Staging') {
             steps {
                 echo 'Deploying code to Staging Environment...'
-                sh 'rm -rf staging/*'
+                // sh 'rm -rf staging/*'
                 sh 'cp -r src/* staging/'
             }
         }
@@ -32,7 +32,7 @@ pipeline {
         stage('Deploy to Production') {
             steps {
                 echo 'Deploying code to Production Environment...'
-                sh 'rm -rf production/*'
+                // sh 'rm -rf production/*'
                 sh 'cp -r src/* production/'
             }
         }
